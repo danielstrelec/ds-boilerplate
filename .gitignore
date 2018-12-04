@@ -1,0 +1,8 @@
+.git*
+!.gitignore
+/log
+node_modules/*
+node_modules
+*.sublime-workspace
+*.log
+.htdeployment
