@@ -1,0 +1,54 @@
+// nastavení a proměnné
+@import "base/variables";
+
+// externí knihovny
+  // normalize ( https://necolas.github.io/normalize.css/ )
+  @import "libs/normalize";
+  // lightbox + animace ( https://github.com/dimsemenov/Magnific-Popup )
+  @import "libs/magnific-popup";
+  .mfp-fade.mfp-bg { opacity: 0; transition: all 0.15s ease-out; }
+  .mfp-fade.mfp-bg.mfp-ready { opacity: 0.8; }
+  .mfp-fade.mfp-bg.mfp-removing { opacity: 0; }
+  .mfp-fade.mfp-wrap .mfp-content { opacity: 0; transition: all 0.15s ease-out; }
+  .mfp-fade.mfp-wrap.mfp-ready .mfp-content { opacity: 1; }
+  .mfp-fade.mfp-wrap.mfp-removing .mfp-content { opacity: 0; }
+
+// základní nastavení a vlastnosti
+  // základní nastavení dokumentu
+  @import "base/base";
+  // layout, mřížka
+  @import "base/layout";
+  // webové fonty
+  @import "base/fonts";
+  // základní definice typografie
+  @import "base/typography";
+  // základní definice typografie
+  @import "base/form";
+  // SVG ikony
+  @import "icons/icon.scss";
+
+// hlavní komponenty
+  // hlavička
+  @import "components/header";
+  // navigace
+  @import "components/nav";
+  // obsahová část stránky
+  @import "components/section";
+  // patička
+  @import "components/footer";
+
+// dílčí komponenty
+  // chybové hlášky
+  @import "components/alert";
+  // tlačítka
+  @import "components/btn";
+  // odrážky
+  @import "components/list";
+  // tabulka
+  @import "components/table";
+
+// pomocné třídy
+@import "base/helpers";
+
+// tisková verze
+@import "base/print";
