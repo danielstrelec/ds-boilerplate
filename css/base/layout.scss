@@ -15,6 +15,13 @@
   flex-wrap: wrap;
 }
 
+// fix pro max-width tabulku
+.row--block {
+  @media (max-width: $mqsm) {
+    display: block;
+  }
+}
+
 // řádek se stejně vysokými bloky
 .row--align {
   & > .col {
@@ -32,6 +39,15 @@
   align-items: center;
 }
 
+// mezery mezi boxy
+.row--gap {
+  margin: 0 -10px;
+
+  & > .col {
+    padding: 10px;
+  }
+}
+
 // blok mřížky, standardně dva vedle sebe
 .col {
   display: flex;
@@ -41,26 +57,51 @@
 // dva vedle sebe
 .col--2 {
   @media (min-width: $mqxs) {
-    flex-basis: 50%;
+    flex-basis: auto;
+
+    width: 50%;
   }
 }
 // tři vedle sebe
 .col--3 {
   @media (min-width: $mqxs) {
-    flex-basis: 33.33333333%;
+    flex-basis: auto;
+
+    width: 50%;
+  }
+
+  @media (min-width: $mqmd) {
+    width: 33.33333333%;
   }
 }
 // čtyři vedle sebe
 .col--4 {
   @media (min-width: $mqxs) {
-    flex-basis: 25%;
+    flex-basis: auto;
+
+    width: 50%;
+  }
+
+  @media (min-width: $mqmd) {
+    width: 25%;
   }
 }
 // pět vedle sebe
 .col--5 {
   @media (min-width: $mqxs) {
-    flex-basis: 20%;
+    flex-basis: auto;
+
+    width: 50%;
   }
+
+  @media (min-width: $mqmd) {
+    width: 20%;
+  }
+}
+
+// buňka se neroztahuje
+.col--precise {
+  flex-grow: 0;
 }
 
 // zarovnání na pravou stranu
