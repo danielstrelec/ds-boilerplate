@@ -240,7 +240,7 @@ gulp.task('svg-icons', function() {
       // uložíme do soubou
       var fileSASS = new Vinyl({
         path: settings.icons.style,
-        contents: new Buffer(dataToStyles)
+        contents: new Buffer.from(dataToStyles)
       });
 
       // vygenerujeme náhledový HTML soubor
@@ -260,10 +260,10 @@ gulp.task('svg-icons', function() {
       // uložíme do soubou
       var fileHTML = new Vinyl({
         path: settings.icons.preview,
-        contents: new Buffer(dataToPreview)
+        contents: new Buffer.from(dataToPreview)
       });
 
-      file.contents = new Buffer($.xml());
+      file.contents = new Buffer.from($.xml());
       this.push(fileSASS);
       this.push(fileHTML);
       this.push(file);
