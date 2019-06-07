@@ -81,7 +81,7 @@ var svgmin = require('gulp-svgmin');
 var postcssPlugins = [
   flexbugs(),
   pxtorem(),
-  autoprefixer( { browsers: [ 'last 5 versions', 'ie >= 10', 'ios >= 7', 'android >= 4.4' ] }),
+  autoprefixer(),
   cssnano()
 ];
 
