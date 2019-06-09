@@ -69,10 +69,12 @@ Gulp řeší spojování, generování a minifikaci SASS a JS souborů, optimali
 Pomocí **Gulp.js** se ze SVG souborů umístěných v **img/icons** generuje sprite **img/icons.svg**. Těmto ikonám jsou odstraněny styly a fill atributy pro možné obarvování v CSS. Pokud chcete zachovat původní barvy SVG, pak použijte prefix **color-** v názvu ikony. Do souboru **../css/icons/icons.scss** se generují velikosti ikon, které se berou z nativní velikosti souboru.
 
 Markup pro vkládání do HTML je:
-`<span class="icon icon--nazevsouboru">
+```
+<span class="icon icon--nazevsouboru">
   <svg class="icon__svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <use xlink:href="/img/icons.svg#nazevsouboru" x="0" y="0" width="100%" height="100%"></use>
   </svg>
-</span>`
+</span>
+```
 
 Vložené ikony lze přebarvovat přes CSS standardně **color: barva** a používat velikost **width: hodnota** - tyto vlastnosti se aplikují na obalující span `.icon--nazevsouboru`.
