@@ -3,7 +3,8 @@
 // nastavení
 var settings = {
   browsersync: {
-    url: 'http://boilerplate.test/',
+    url: 'http://ds-boilerplate.test/',
+    browser: 'chrome',
     watch: ['*.html', '*.htm', '*.php']
   },
   css: {
@@ -14,7 +15,7 @@ var settings = {
     components: ['css/base/**/*.scss', '!css/base/print.scss', '!css/base/variables.scss', 'css/components/**/*.scss']
   },
   js: {
-    source: ['js/libs/jquery.magnific-popup.js', 'js/components/**/*.js', 'js/main.js'],
+    source: ['js/libs/simple-lightbox.min.js', 'js/components/**/*.js', 'js/main.js'],
     target: 'js/',
     filename: 'scripts.js',
     watch: ['js/**/*.js', '!js/scripts.js'],
@@ -51,7 +52,7 @@ var gulp = require('gulp');
   // Vinyl - konvertor streamu
   var Vinyl = require('vinyl');
 // BrowserSync - live realod, server, ovládání prohlížeče
-var browsersync = require('browser-sync');
+var browserSync = require('browser-sync');
 // SASS - generování CSS z preprocesoru
 var sass = require('gulp-sass');
 // postCSS - postprocessing CSS (minifikace, autoprefixer...)
@@ -91,20 +92,8 @@ var onError = function (err) {
   this.emit('end');
 };
 
-// nastavení BrowserSync
-gulp.task('browser-sync', function() {
-  browsersync({
-    proxy: settings.browsersync.url
-  });
-});
-
-// BrowserSync live-reload
-gulp.task('browsersync-reload', function () {
-    browsersync.reload();
-});
-
 // SASS kompilace
-gulp.task('sass', function() {
+function wtSass() {
   return gulp.src(settings.css.source)
     .pipe(plumber({ errorHandler: onError }))
     .pipe(sourcemaps.init())
@@ -112,11 +101,11 @@ gulp.task('sass', function() {
     .pipe(rename(settings.css.filename))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(settings.css.target))
-    .pipe(browsersync.reload({ stream: true }));
-});
+    .pipe(browserSync.stream());
+};
 
 // CSS kompilace (produkce)
-gulp.task('makecss', ['csscomb'], function() {
+function wtCss() {
   return gulp.src(settings.css.source)
     .pipe(plumber({ errorHandler: onError }))
     .pipe(sourcemaps.init())
@@ -125,18 +114,18 @@ gulp.task('makecss', ['csscomb'], function() {
     .pipe(rename(settings.css.filename))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(settings.css.target));
-});
+};
 
 // CSScomb - úpravy SASS souborů (řazení vlastností, odsazení...)
-gulp.task('csscomb', function() {
+function wtCssComb() {
   return gulp.src(settings.css.components, { base: './' })
     .pipe(plumber({ errorHandler: onError }))
     .pipe(csscomb())
     .pipe(gulp.dest('./'));
-});
+};
 
 // CSS - lintování (Stylelint)
-gulp.task('stylelint', ['makecss'], function() {
+function wtStyleLint() {
   return gulp.src(settings.css.components, { base: './' })
     .pipe(plumber({ errorHandler: onError }))
     .pipe(stylelint({
@@ -147,48 +136,47 @@ gulp.task('stylelint', ['makecss'], function() {
         }
       ]
     }));
-});
+};
 
 // JavaScript - spojení souborů
-gulp.task('concatjs', ['prettier'], function() {
+function wtConcatJs() {
   return gulp.src(settings.js.source, { base: './' })
     .pipe(plumber({ errorHandler: onError }))
     .pipe(sourcemaps.init())
     .pipe(concat(settings.js.target + settings.js.filename))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./'))
-    .pipe(browsersync.reload({ stream: true }));
-});
+    .pipe(gulp.dest('./'));
+};
 
 // JavaScript - spojení a minifikace (produkce)
-gulp.task('makejs', ['concatjs'], function() {
+function wtJs() {
   return gulp.src(settings.js.target + settings.js.filename, { base: './' })
     .pipe(plumber({ errorHandler: onError }))
     .pipe(sourcemaps.init())
     .pipe(uglify())
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./'));
-});
+};
 
 // JavaScript - lintování
-gulp.task('jslint', ['makejs'], function() {
+function wtJsLint() {
   return gulp.src(settings.js.components)
     .pipe(plumber({ errorHandler: onError }))
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(jshint.reporter('fail'));
-});
+};
 
 // Prettier - uhlazení JS souborů
-gulp.task('prettier', function() {
+function wtPrettier() {
   return gulp.src(settings.js.components, { base: './' })
     .pipe(plumber({ errorHandler: onError }))
     .pipe(prettier({ singleQuote: true }))
     .pipe(gulp.dest('./'));
-});
+};
 
 // optimalizace obrázků
-gulp.task('images', function() {
+function wtImages() {
   return gulp.src(settings.img.source)
     .pipe(plumber({ errorHandler: onError }))
     .pipe(imagemin({
@@ -196,16 +184,15 @@ gulp.task('images', function() {
       pngquant: true,
       progressive: true
     }))
-    .pipe(gulp.dest(settings.img.target))
-});
+    .pipe(gulp.dest(settings.img.target));
+};
 
 // generování SVG sprite ikon
-gulp.task('svg-icons', function() {
+function wtSvgIcons() {
   return gulp.src(settings.icons.source)
     .pipe(plumber({ errorHandler: onError }))
     .pipe(svgstore())
     .pipe(through2.obj(function (file, encoding, cb) {
-
       var $ = cheerio.load(file.contents.toString(), { xmlMode: true });
 
       // odstraní fill atributy u souborů, které nemají v názvu color
@@ -271,10 +258,10 @@ gulp.task('svg-icons', function() {
 
     }))
     .pipe(gulp.dest(settings.icons.target));
-})
+};
 
 // optimalizace SVG sprite
-gulp.task('svg-optimize', ['svg-icons'], function() {
+function wtSvgOptimize() {
   return gulp.src(settings.icons.target + settings.icons.filename, { base: './' })
     .pipe(plumber({ errorHandler: onError }))
     .pipe(svgmin({
@@ -289,20 +276,37 @@ gulp.task('svg-optimize', ['svg-icons'], function() {
         js2svg: { pretty: settings.icons.prettycode }
     }))
     .pipe(gulp.dest('./'));
-});
+};
 
 // sledování změn souborů
-gulp.task('watch', ['browser-sync'], function () {
-  gulp.watch(settings.icons.source, ['svg-optimize']);
-  gulp.watch(settings.css.watch, ['sass']);
-  gulp.watch(settings.js.watch, ['concatjs', 'browsersync-reload']);
-  gulp.watch(settings.browsersync.watch, ['browsersync-reload']);
-});
+function wtWatch(cb) {
+
+  // nastavení BrowserSync:
+  browserSync.init({
+    proxy: settings.browsersync.url,
+    browser: settings.browsersync.browser
+  });
+
+  gulp.watch( settings.icons.source, wtSvgIcons ).on('change', browserSync.reload );
+  gulp.watch( settings.css.watch, wtSass );
+  gulp.watch( settings.js.watch, wtConcatJs ).on('change', browserSync.reload );
+  gulp.watch( settings.browsersync.watch ).on('change', browserSync.reload );
+
+  cb();
+};
 
 // aliasy tasků
   // úpravy před nahráním do produkce
-  gulp.task('deploy', ['stylelint', 'jslint', 'images']);
+  exports.deploy = gulp.parallel( gulp.series( wtCssComb, wtCss, wtStyleLint ), gulp.series( wtPrettier, wtConcatJs, wtJs, wtJsLint ), wtImages, wtSvgOptimize );
+
+  // generování CSS
+  exports.makecss = gulp.series( wtCssComb, wtCss );
+
+  // generování JavaScriptu
+  exports.makejs = gulp.series( wtPrettier, wtConcatJs, wtJs );
+
   // generování ikon + optimalizace
-  gulp.task('icons', ['svg-optimize']);
+  exports.icons = gulp.series( wtSvgIcons, wtSvgOptimize );
+
   // defaultni task
-  gulp.task('default', ['watch']);
+  exports.default = gulp.parallel( wtWatch );

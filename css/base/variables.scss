@@ -2,7 +2,7 @@
 
   // základní barvy
   $color_white: #fff;
-  $color_black: #2e2f32;
+  $color_black: #000;
 
   // šedá barva
   $color_gray: #707070;
@@ -10,23 +10,31 @@
   $color_gray_light: #f0f0f0;
 
   // hlavní barvy projektu
-  $color_main: #84a4b1;
-  $color_main_dark: #00273a;
-  $color_main_light: #dbe6eb;
+  $color_main: #1d354b;
+  $color_main_dark: darken( $color_main, 10% );
+  $color_main_light: lighten( $color_main, 70% );
 
   // sekundární barvy projektu
-  $color_secondary: #d9534f;
-  $color_secondary_dark: darken($color_secondary, 10%);
-  $color_secondary_lignt: lighten($color_secondary, 10%);
+  $color_secondary: #2d687f;
+  $color_secondary_dark: darken( $color_secondary, 10% );
+  $color_secondary_light: lighten( $color_secondary, 50% );
 
   // barvy pro chybové hlášky
-  $color_success: #5cb85c;
-  $color_info: $color_main;
-  $color_danger: #d9534f;
+  $color_success: #40b840;
+  $color_info: #2d687f;
+  $color_danger: #c81917;
+
+  // lightbox
+  $sl-overlay-background: $color_main;
+  $sl-overlay-opacity: 0.9;
+  $sl-navigation-color: $color_white;
 
 // zakulacené rohy
 $radius: 4px;
 $radius_button: 6px;
+
+// layout
+$layout_gap: 10px;
 
 // breakpointy
 

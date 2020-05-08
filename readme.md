@@ -39,7 +39,7 @@ Při použití `gulp deploy` se vyjma výše uvedeného použije **jshint** pro 
 
 ### Další použité knihovny
 
-* **jquery.magnific-popup.js** - lightbox skript pro jQuery - https://github.com/dimsemenov/Magnific-Popup
+* **simple-lightbox.min.js** - lightbox skript - https://github.com/andreknieriem/simplelightbox
 * **svg4everybody.js** - podpora SVG pro starší prohlížeče - https://github.com/jonathantneal/svg4everybody
 * **webfont.js** - loader pro Google Fonts, asynchronní odložené načítání - https://github.com/typekit/webfontloader
 

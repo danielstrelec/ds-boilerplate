@@ -2,10 +2,10 @@
 .container {
   max-width: $mqlg;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 $layout_gap + 5px;
 
   @media (min-width: $mqsm) {
-    padding: 0 10px;
+    padding: 0 $layout_gap;
   }
 }
 
@@ -13,6 +13,14 @@
 .row {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+
+  margin: 0 (-$layout_gap);
+
+  // mezera mezi boxy
+  & > .col {
+    padding: $layout_gap;
+  }
 }
 
 // fix pro max-width tabulku
@@ -39,16 +47,16 @@
   align-items: center;
 }
 
-// mezery mezi boxy
-.row--gap {
-  margin: 0 -10px;
+// řádek bez mezer
+.row--nogap {
+  margin: 0;
 
   & > .col {
-    padding: 10px;
+    padding: 0;
   }
 }
 
-// blok mřížky, standardně dva vedle sebe
+// blok mřížky
 .col {
   display: flex;
   flex: 1 0 100%;
@@ -98,6 +106,18 @@
     width: 20%;
   }
 }
+// šest vedle sebe
+.col--6 {
+  @media (min-width: $mqxs) {
+    flex-basis: auto;
+
+    width: 50%;
+  }
+
+  @media (min-width: $mqmd) {
+    width: 16.66666666666667%;
+  }
+}
 
 // buňka se neroztahuje
 .col--precise {
@@ -117,4 +137,9 @@
 // zarovnání na střed
 .col--center {
   align-items: center;
+}
+
+// změna osy
+.col--row {
+  flex-direction: row;
 }

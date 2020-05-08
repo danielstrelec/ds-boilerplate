@@ -51,6 +51,9 @@
   tr { page-break-inside: avoid !important; }
 
   // skrytí nepotřebných částí
-  .no, object, .noprint, nav, .nav, iframe, form, .form, button, .button { display: none !important; }
+  .no, object, .noprint, nav, .nav, iframe, form, .form, button, .btn, .icon { display: none !important; }
+
+  // layout
+  .row { display: block !important; margin: 0 !important; }
 
 }

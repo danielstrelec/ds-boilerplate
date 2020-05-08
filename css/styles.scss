@@ -4,14 +4,8 @@
 // externí knihovny
   // normalize ( https://necolas.github.io/normalize.css/ )
   @import "libs/normalize";
-  // lightbox + animace ( https://github.com/dimsemenov/Magnific-Popup )
-  @import "libs/magnific-popup";
-  .mfp-fade.mfp-bg { opacity: 0; transition: all 0.15s ease-out; }
-  .mfp-fade.mfp-bg.mfp-ready { opacity: 0.8; }
-  .mfp-fade.mfp-bg.mfp-removing { opacity: 0; }
-  .mfp-fade.mfp-wrap .mfp-content { opacity: 0; transition: all 0.15s ease-out; }
-  .mfp-fade.mfp-wrap.mfp-ready .mfp-content { opacity: 1; }
-  .mfp-fade.mfp-wrap.mfp-removing .mfp-content { opacity: 0; }
+  // lightbox ( https://github.com/andreknieriem/simplelightbox )
+  @import "libs/simplelightbox";
 
 // základní nastavení a vlastnosti
   // základní nastavení dokumentu
@@ -23,7 +17,7 @@
   // základní definice typografie
   @import "base/typography";
   // základní definice formulářů
-  @import "base/form";
+  @import "base/forms";
   // SVG ikony
   @import "icons/icon.scss";
 
