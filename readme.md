@@ -18,7 +18,7 @@ Při použití `gulp deploy` se vyjma výše uvedeného použije **Stylelint** p
   * **css/base** - základní vlastnosti a styly, nastavení, typografie
     * **base/base** - základní definice dokumentu a respo
     * **base/fonts** - definice a nastavení fontů
-    * **base/form** - základní vzhled formulářových polí
+    * **base/forms** - základní vzhled formulářových polí
     * **base/helpers** - pomocné styly
     * **base/layout** - vstupní layout a jednoduchá mřížka (flexbox)
     * **base/print** - tiskové styly, přebíjíme deklarace pro standardizaci
