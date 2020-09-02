@@ -12,7 +12,7 @@ var settings = {
     target: 'css/',
     filename: 'styles.css',
     watch: ['css/**/*.scss', 'css/**/*.css', '!css/styles.css'],
-    components: ['css/base/**/*.scss', '!css/base/print.scss', '!css/base/variables.scss', 'css/components/**/*.scss']
+    components: ['css/base/**/*.scss', '!css/base/print.scss', '!css/base/variables.scss', '!css/base/fonts.scss', 'css/components/**/*.scss']
   },
   js: {
     source: ['js/libs/simple-lightbox.min.js', 'js/components/**/*.js', 'js/main.js'],
