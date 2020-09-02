@@ -31,7 +31,7 @@ Při použití `gulp deploy` se vyjma výše uvedeného použije **Stylelint** p
 
 ## JavaScript
 
-Je používána **jQuery** ve verzi 1.12.4, spojování skriptů a minifikaci řeší **Gulp.js**.
+Je používána **jQuery** ve verzi 3.5.1, spojování skriptů a minifikaci řeší **Gulp.js**.
 
 Při vývoji se aplikuje **Prettier**, následně se spojí soubory a generují sourcemapy. Při použití `gulp makejs` se navíc provede minifikace. Soubory umístěné v adresáři **js/libs se nekontrolují a nespojují**.
 
