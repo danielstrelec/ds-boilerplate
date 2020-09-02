@@ -59,7 +59,7 @@
 // blok mřížky
 .col {
   display: flex;
-  flex: 1 0 100%;
+  flex: 0 0 100%;
   flex-direction: column;
 }
 // dva vedle sebe
@@ -119,9 +119,9 @@
   }
 }
 
-// buňka se neroztahuje
-.col--precise {
-  flex-grow: 0;
+// buňka se roztahuje
+.col--grow {
+  flex-grow: 1;
 }
 
 // zarovnání na pravou stranu
